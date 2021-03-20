@@ -1,0 +1,41 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:inventory_manager/core/inventory_colors.dart';
+import 'package:inventory_manager/core/inventory_routes.dart';
+import 'package:inventory_manager/screens/home_page.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoApp(
+      title: 'Inventory Manager',
+      theme: CupertinoThemeData(
+        barBackgroundColor: Colors.grey.shade50,
+        scaffoldBackgroundColor: Colors.grey.shade50,
+      ),
+      initialRoute: InventoryRoutes.home,
+      routes: {
+        InventoryRoutes.home: (_) => HomePage(),
+      },
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case InventoryRoutes.home:
+            return CupertinoPageRoute(
+              builder: (_) => HomePage(),
+              settings: settings,
+            );
+          default:
+            return CupertinoPageRoute(
+              builder: (_) => HomePage(),
+              settings: settings,
+            );
+        }
+      },
+    );
+  }
+}
