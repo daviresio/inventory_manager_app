@@ -2,11 +2,11 @@ import 'package:flutter/widgets.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 
 extension InventoryTextExtension on Text {
-  static const defaultTextColor = InventoryColor.darkColor;
+  static const defaultTextColor = InventoryColors.darkColor;
 
   Text mediumBold({Color color = defaultTextColor}) {
     return Text(
-      this.data,
+      this.data!,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 16,
@@ -17,7 +17,7 @@ extension InventoryTextExtension on Text {
 
   Text mediumRegular({Color color = defaultTextColor}) {
     return Text(
-      this.data,
+      this.data!,
       style: TextStyle(
         fontWeight: FontWeight.normal,
         fontSize: 16,
@@ -28,7 +28,7 @@ extension InventoryTextExtension on Text {
 
   Text bigTitle({Color color = defaultTextColor}) {
     return Text(
-      this.data,
+      this.data!,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 20,
@@ -37,9 +37,9 @@ extension InventoryTextExtension on Text {
     );
   }
 
-  Text smallBody({Color color = defaultTextColor}) {
+  Text smallBold({Color color = defaultTextColor}) {
     return Text(
-      this.data,
+      this.data!,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 10,
@@ -51,6 +51,6 @@ extension InventoryTextExtension on Text {
 
 extension InventoryIconExtension on Icon {
   Icon defaultStyle() {
-    return Icon(this.icon, color: InventoryColor.darkColor, size: 16);
+    return Icon(this.icon, color: InventoryColors.darkColor, size: 16);
   }
 }

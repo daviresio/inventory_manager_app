@@ -4,6 +4,7 @@ import 'package:inventory_manager/core/inventory_radius.dart';
 import 'package:inventory_manager/core/inventory_spacing.dart';
 import 'package:inventory_manager/helper/date_helper.dart';
 import 'package:inventory_manager/core/inventory_extensions.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ResumeCard extends StatelessWidget {
@@ -17,21 +18,21 @@ class ResumeCard extends StatelessWidget {
   final int stockOut2;
 
   ResumeCard({
-    @required this.date1,
-    @required this.total1,
-    @required this.stockIn1,
-    @required this.stockOut1,
-    @required this.date2,
-    @required this.total2,
-    @required this.stockIn2,
-    @required this.stockOut2,
+    required this.date1,
+    required this.total1,
+    required this.stockIn1,
+    required this.stockOut1,
+    required this.date2,
+    required this.total2,
+    required this.stockIn2,
+    required this.stockOut2,
   });
 
   final _pageController = PageController();
 
   Widget _values({
-    @required String label,
-    @required int value,
+    required String label,
+    required int value,
     bool hasBorder = true,
   }) {
     return Expanded(
@@ -41,7 +42,7 @@ class ResumeCard extends StatelessWidget {
           border: hasBorder
               ? Border(
                   left: BorderSide(
-                    color: InventoryColor.white.withOpacity(0.4),
+                    color: InventoryColors.white.withOpacity(0.4),
                     width: 0.6,
                   ),
                 )
@@ -50,9 +51,10 @@ class ResumeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(value.toString()).bigTitle(color: InventoryColor.white),
+            Text(value.toString()).bigTitle(color: InventoryColors.white),
             SizedBox(height: InventorySpacing.small3),
-            Text(label).smallBody(color: InventoryColor.white.withOpacity(0.5)),
+            Text(label)
+                .smallBold(color: InventoryColors.white.withOpacity(0.5)),
           ],
         ),
       ),
@@ -60,10 +62,10 @@ class ResumeCard extends StatelessWidget {
   }
 
   Widget _cardContent({
-    @required DateTime date,
-    @required int total,
-    @required int stockIn,
-    @required int stockOut,
+    required DateTime date,
+    required int total,
+    required int stockIn,
+    required int stockOut,
   }) {
     return Column(
       children: [
@@ -72,10 +74,10 @@ class ResumeCard extends StatelessWidget {
           child: Row(
             children: [
               Text(DateHelper.isToday(date) ? 'Today' : 'Yesterday')
-                  .mediumBold(color: InventoryColor.white),
+                  .mediumBold(color: InventoryColors.white),
               SizedBox(width: InventorySpacing.small1),
               Text('${DateHelper.getMinthInitials(date)} ${date.day}')
-                  .mediumBold(color: InventoryColor.white.withOpacity(0.5))
+                  .mediumBold(color: InventoryColors.white.withOpacity(0.5))
             ],
           ),
         ),
@@ -98,7 +100,7 @@ class ResumeCard extends StatelessWidget {
       margin: InventorySpacing.medium2.spacingAll(),
       padding: EdgeInsets.symmetric(vertical: InventorySpacing.medium2),
       decoration: BoxDecoration(
-        color: InventoryColor.primaryColor,
+        color: InventoryColors.primaryColor,
         borderRadius: InventoryRadius.medium.radiusAll(),
       ),
       child: Stack(
@@ -131,8 +133,8 @@ class ResumeCard extends StatelessWidget {
                 dotHeight: 6,
                 dotWidth: 6,
                 spacing: InventorySpacing.tiny2,
-                dotColor: InventoryColor.white.withOpacity(0.3),
-                activeDotColor: InventoryColor.white,
+                dotColor: InventoryColors.white.withOpacity(0.3),
+                activeDotColor: InventoryColors.white,
               ),
             ),
           ),

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_manager/components/inventory_card.dart';
 import 'package:inventory_manager/components/inventory_divider.dart';
-import 'package:inventory_manager/components/inventory_ui.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_extensions.dart';
@@ -29,7 +28,7 @@ class ResumePage extends StatelessWidget {
                 GestureDetector(
                   child: Icon(
                     InventoryIcons.plus,
-                    color: InventoryColor.darkColor,
+                    color: InventoryColors.darkColor,
                     size: 18,
                   ),
                   onTap: () {},
@@ -38,7 +37,7 @@ class ResumePage extends StatelessWidget {
                 GestureDetector(
                   child: Icon(
                     InventoryIcons.bell,
-                    color: InventoryColor.darkColor,
+                    color: InventoryColors.darkColor,
                     size: 18,
                   ),
                   onTap: () {},
@@ -69,12 +68,12 @@ class ResumePage extends StatelessWidget {
                         children: [
                           Icon(
                             InventoryIcons.search,
-                            color: InventoryColor.mediumColor,
+                            color: InventoryColors.mediumColor,
                             size: 16,
                           ),
                           SizedBox(width: InventorySpacing.small1),
                           Text('Search product').mediumRegular(
-                            color: InventoryColor.mediumColor,
+                            color: InventoryColors.mediumColor,
                           ),
                         ],
                       ),
@@ -83,7 +82,7 @@ class ResumePage extends StatelessWidget {
                           Container(
                             height: 25,
                             child: InventoryDivider.vertical(
-                              color: InventoryColor.mediumColor,
+                              color: InventoryColors.mediumColor,
                               width: 0.5,
                               margin: EdgeInsets.only(
                                 right: InventorySpacing.small3,
@@ -221,10 +220,10 @@ class ResumePage extends StatelessWidget {
   }
 
   Widget _itemRow({
-    @required IconData icon,
-    @required String title,
-    @required onTap,
-    Color iconColor = InventoryColor.primaryColor,
+    required IconData icon,
+    required String title,
+    required onTap,
+    Color iconColor = InventoryColors.primaryColor,
   }) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: InventorySpacing.small1),
@@ -242,7 +241,7 @@ class ResumePage extends StatelessWidget {
           Icon(
             InventoryIcons.angle_right,
             size: 16,
-            color: InventoryColor.darkColor,
+            color: InventoryColors.darkColor,
           ),
         ],
       ),

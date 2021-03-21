@@ -5,17 +5,17 @@ import 'package:inventory_manager/core/inventory_spacing.dart';
 import 'package:inventory_manager/core/inventory_extensions.dart';
 
 class InventoryCard extends StatelessWidget {
-  final String title;
+  final String? title;
   final Widget child;
 
-  const InventoryCard({@required this.child, this.title});
+  const InventoryCard({required this.child, this.title});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: InventorySpacing.small2.spacingAll(),
       decoration: BoxDecoration(
-          color: InventoryColor.white,
+          color: InventoryColors.white,
           borderRadius: InventoryRadius.small.radiusAll(),
           boxShadow: [
             BoxShadow(
@@ -31,7 +31,7 @@ class InventoryCard extends StatelessWidget {
           if (title != null)
             Container(
               margin: EdgeInsets.only(bottom: InventorySpacing.small2),
-              child: Text(title).mediumBold(),
+              child: Text(title!).mediumBold(),
             ),
           child,
         ],

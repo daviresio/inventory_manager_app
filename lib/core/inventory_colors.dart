@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class InventoryColor {
+class InventoryColors {
   static const primaryColor = Color(0xFF4F67FF);
   static const secundaryColor = Color(0xFF82c0cc);
   static const primaryDarkColor = Color(0xFF16697a);
@@ -8,4 +8,6 @@ class InventoryColor {
   static const mediumColor = Color(0x8C525B5E);
   static const lightColor = Color(0xFFede7e3);
   static const white = Color(0xFFFFFFFF);
+  static const black = Color(0xFF000000);
+  static const lightGrey = Color(0XFFeaeaea);
 }

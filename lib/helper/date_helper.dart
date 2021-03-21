@@ -19,6 +19,6 @@ class DateHelper {
   }
 
   static String getMinthInitials(DateTime date) {
-    return months[date.month].substring(0, 3);
+    return months[date.month]!.substring(0, 3);
   }
 }

@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
-import 'package:inventory_manager/core/inventory_extensions.dart';
 import 'package:inventory_manager/screens/product_page.dart';
 import 'package:inventory_manager/screens/resume_page.dart';
-import 'package:inventory_manager/screens/settings_page.dart';
-import 'package:inventory_manager/screens/transaction_page.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  final pages = [
+    ResumePage(),
+    ProductPage(),
+    Container(),
+    Container(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       tabBuilder: (context, index) {
-        return ResumePage();
+        return pages[index];
       },
     );
   }

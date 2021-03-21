@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_routes.dart';
 import 'package:inventory_manager/screens/home_page.dart';
 

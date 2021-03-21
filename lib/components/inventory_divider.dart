@@ -7,7 +7,7 @@ class InventoryDivider {
   }
 
   static Widget vertical({
-    color = InventoryColor.darkColor,
+    color = InventoryColors.darkColor,
     double width = 1,
     double padding = 0,
     EdgeInsets margin = EdgeInsets.zero,
