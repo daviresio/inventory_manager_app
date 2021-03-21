@@ -41,5 +41,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>This will allow the app to use your camera so you can take pictures to create your ads.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This will allow the app to save car photos to your device's gallery.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This will allow the app to save car photos to your device's gallery.</string>
 </dict>
 </plist>

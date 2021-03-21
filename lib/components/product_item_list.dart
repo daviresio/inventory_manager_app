@@ -25,8 +25,7 @@ class ProductItemList extends StatelessWidget {
           Row(
             children: [
               InventoryNetworkImage(
-                url:
-                    'https://miro.medium.com/max/1838/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg',
+                url: product.image,
                 width: 48,
                 height: 48,
                 radius: InventoryRadius.medium,
@@ -38,7 +37,7 @@ class ProductItemList extends StatelessWidget {
                 children: [
                   Text(product.name).mediumRegular(),
                   SizedBox(height: InventorySpacing.tiny2),
-                  Text(product.barcode).smallBold(),
+                  Text(product.barcode ?? '').smallBold(),
                 ],
               ),
             ],

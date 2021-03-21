@@ -3,33 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:inventory_manager/components/product_item_list.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
-import 'package:inventory_manager/core/inventory_radius.dart';
 import 'package:inventory_manager/core/inventory_spacing.dart';
-import 'package:inventory_manager/core/inventory_extensions.dart';
 import 'package:inventory_manager/models/product_model.dart';
 import 'package:inventory_manager/screens/add_product_page.dart';
+import 'package:inventory_manager/services/product_service.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
-List<ProductModel> products = [
-  ProductModel(
-      id: '1',
-      name: 'Primeiro produto',
-      amount: 4,
-      image: '',
-      barcode: '1243423'),
-  ProductModel(
-      id: '1',
-      name: 'Segundo produto',
-      amount: 10,
-      image: '',
-      barcode: '1243423'),
-  ProductModel(
-      id: '1',
-      name: 'Terceiro produto',
-      amount: 5,
-      image: '',
-      barcode: '1243423'),
-];
 
 class ProductPage extends StatefulWidget {
   @override
@@ -37,6 +15,20 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  List<ProductModel> products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    ProductService.listProducts().then((value) {
+      if (value != null) {
+        setState(() {
+          products = List<ProductModel>.from(value);
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(

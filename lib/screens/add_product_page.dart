@@ -6,9 +6,11 @@ import 'package:inventory_manager/core/inventory_icons.dart';
 import 'package:inventory_manager/core/inventory_radius.dart';
 import 'package:inventory_manager/core/inventory_spacing.dart';
 import 'package:inventory_manager/core/inventory_extensions.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddProductPage extends StatelessWidget {
+  final picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     Widget _image() {
@@ -22,11 +24,23 @@ class AddProductPage extends StatelessWidget {
               actions: [
                 CupertinoActionSheetAction(
                   child: Text('Open gallery'),
-                  onPressed: () {},
+                  onPressed: () async {
+                    var result =
+                        await picker.getImage(source: ImageSource.gallery);
+                    if (result != null) {
+                      print(result);
+                    }
+                  },
                 ),
                 CupertinoActionSheetAction(
                   child: Text('Take photo'),
-                  onPressed: () {},
+                  onPressed: () async {
+                    var result =
+                        await picker.getImage(source: ImageSource.camera);
+                    if (result != null) {
+                      print(result);
+                    }
+                  },
                 ),
               ],
               cancelButton: CupertinoActionSheetAction(

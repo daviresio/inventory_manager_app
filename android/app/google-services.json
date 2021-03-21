@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "838364545365",
+    "project_id": "inventory-manager-6401a",
+    "storage_bucket": "inventory-manager-6401a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838364545365:android:4cab5e0e232c3394ab2fdc",
+        "android_client_info": {
+          "package_name": "com.resio.inventory_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838364545365-gagq3firpc8tfth6obgu9lbvpvs7a5bl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.resio.inventory_manager",
+            "certificate_hash": "b8202b60bcb97dc3708e620bc9611f518d92c43e"
+          }
+        },
+        {
+          "client_id": "838364545365-qit3auudesjukn3qgicdnppi7mdscqu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBobRkJqfh9iygbuoauUQmVyLgEaMfpjcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838364545365-qit3auudesjukn3qgicdnppi7mdscqu4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

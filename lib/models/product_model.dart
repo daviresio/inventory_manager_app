@@ -1,18 +1,18 @@
 import 'dart:convert';
 
 class ProductModel {
-  String id;
+  String? id;
   String name;
   int amount;
-  String image;
-  String barcode;
+  String? image;
+  String? barcode;
 
   ProductModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.amount,
-    required this.image,
-    required this.barcode,
+    this.image,
+    this.barcode,
   });
 
   Map<String, dynamic> toMap() {
@@ -29,7 +29,7 @@ class ProductModel {
     return ProductModel(
       id: map['id'],
       name: map['name'],
-      amount: map['amount'],
+      amount: map['amount'] ?? 0,
       image: map['image'],
       barcode: map['barcode'],
     );

@@ -25,6 +25,8 @@ class ProductService {
 
       return true;
     } catch (e, s) {
+      print(e);
+      print(s);
       return false;
     }
   }
@@ -49,12 +51,13 @@ class ProductService {
 
       if (result.hasException) throw result.exception!;
 
-      var data = result.data!['product']
-          .map((element) => ProductModel.fromJson(element))
-          .toList();
+      var responseJson = result.data!['product'];
+      var data = responseJson.map((element) => ProductModel.fromMap(element));
 
-      return data;
+      return List<ProductModel>.from(data);
     } catch (e, s) {
+      print(e);
+      print(s);
       return null;
     }
   }
