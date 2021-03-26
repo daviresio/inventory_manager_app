@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class InventoryColors {
   static const primaryColor = Color(0xFF4F67FF);
@@ -10,4 +10,5 @@ class InventoryColors {
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF000000);
   static const lightGrey = Color(0XFFeaeaea);
+  static const transparent = Colors.transparent;
 }

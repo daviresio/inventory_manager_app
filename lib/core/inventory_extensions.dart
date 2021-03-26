@@ -37,6 +37,17 @@ extension InventoryTextExtension on Text {
     );
   }
 
+  Text small({Color color = defaultTextColor}) {
+    return Text(
+      this.data!,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 10,
+        color: color,
+      ),
+    );
+  }
+
   Text smallBold({Color color = defaultTextColor}) {
     return Text(
       this.data!,

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>838364545365-p1972fivuepqhd6knqb2m1am31plsl7c.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.838364545365-p1972fivuepqhd6knqb2m1am31plsl7c</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>838364545365-gagq3firpc8tfth6obgu9lbvpvs7a5bl.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA9XI_W06KySNlToBQiHsXA_ODy-4ilGvs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>838364545365</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.resio.inventoryManager</string>
+	<key>PROJECT_ID</key>
+	<string>inventory-manager-6401a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>inventory-manager-6401a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:838364545365:ios:0d202fbbae794973ab2fdc</string>
+</dict>
+</plist>

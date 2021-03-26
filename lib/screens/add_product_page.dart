@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_manager/components/input_row.dart';
+import 'package:inventory_manager/components/inventory_divider.dart';
 import 'package:inventory_manager/components/inventory_network_image.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
@@ -91,49 +93,98 @@ class AddProductPage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Container(
-        child: CustomScrollView(
-          physics: ClampingScrollPhysics(),
-          slivers: [
-            SliverToBoxAdapter(
-              child: Container(
-                padding: InventorySpacing.small3.spacingAll(),
-                margin: EdgeInsets.only(
-                  bottom: InventorySpacing.small3,
-                ),
-                child: Center(
-                  child: Text('Add product').mediumBold(),
-                ),
+      backgroundColor: InventoryColors.white,
+      body: CustomScrollView(
+        physics: ClampingScrollPhysics(),
+        slivers: [
+          SliverToBoxAdapter(
+            child: Container(
+              padding: InventorySpacing.small3.spacingAll(),
+              margin: EdgeInsets.only(
+                bottom: InventorySpacing.small3,
+              ),
+              child: Center(
+                child: Text('Add product').mediumBold(),
               ),
             ),
-            SliverPadding(
-              padding: EdgeInsets.only(bottom: InventorySpacing.medium3),
-              sliver: SliverToBoxAdapter(
-                child: Center(
-                  child: _image(),
-                ),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.only(bottom: InventorySpacing.medium3),
+            sliver: SliverToBoxAdapter(
+              child: Center(
+                child: _image(),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                child: Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: InventorySpacing.medium2),
-                      child: Text('Product').mediumRegular(),
-                    ),
-                    Flexible(
-                      child: CupertinoTextField(
-                        placeholder: 'Input product name.',
+          ),
+          SliverToBoxAdapter(
+            child: InputRow(
+              label: 'Barcode',
+              placeholder: 'Select barcode input method',
+              onTap: () {},
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: InventoryDivider.horizontal(
+              margin: EdgeInsets.symmetric(horizontal: InventorySpacing.small3),
+              height: 0.2,
+              color: InventoryColors.darkColor.withOpacity(0.3),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: InputRow(
+              label: 'Product',
+              placeholder: 'Input product name.',
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              height: 8,
+              color: InventoryColors.lightGrey,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: InventorySpacing.small3.spacingAll(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Text('Categories').mediumBold(),
+                      SizedBox(width: InventorySpacing.tiny3),
+                      Icon(
+                        InventoryIcons.circle_question,
+                        size: 16,
+                        color: InventoryColors.darkColor,
                       ),
+                    ],
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Customize',
+                      style: TextStyle(color: InventoryColors.primaryColor),
                     ),
-                    Icon(InventoryIcons.angle_right),
-                  ],
-                ),
+                    onPressed: () {},
+                  ),
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: InventorySpacing.medium3.spacingAll(),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Add product categories for convenient management.')
+                      .small(),
+                  Text('ex: Brand, manufacture, type, etc.').small(),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
       floatingActionButton: Container(
         width: MediaQuery.of(context).size.width,
