@@ -9,8 +9,14 @@ class InputRow extends StatelessWidget {
   final String label;
   final String placeholder;
   final void Function()? onTap;
+  final TextEditingController? controller;
 
-  const InputRow({required this.label, required this.placeholder, this.onTap});
+  const InputRow({
+    required this.label,
+    required this.placeholder,
+    this.onTap,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +35,7 @@ class InputRow extends StatelessWidget {
             SizedBox(width: InventorySpacing.medium2),
             Flexible(
               child: CupertinoTextField(
+                controller: controller,
                 readOnly: isTouch,
                 placeholder: placeholder,
                 decoration: BoxDecoration(

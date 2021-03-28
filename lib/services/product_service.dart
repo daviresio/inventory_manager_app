@@ -3,10 +3,10 @@ import 'package:inventory_manager/models/product_model.dart';
 import 'package:inventory_manager/services/graphql_client_service.dart';
 
 class ProductService {
-  static Future<bool> createProduct({required ProductModel product}) async {
+  static Future<bool> createProduct({required ProductModel payload}) async {
     String query = '''
-      mutation CreateProduct($product: product_insert_input!) {
-        insert_product(objects: [$product]) {
+      mutation CreateProduct(\$product: product_insert_input!) {
+        insert_product(objects: [\$product]) {
           affected_rows
         }
       }
@@ -16,7 +16,7 @@ class ProductService {
       final options = QueryOptions(
         document: gql(query),
         variables: <String, dynamic>{
-          'product': product.toJson(),
+          'product': payload.toMap(),
         },
       );
       final result = await GraphqlClient.request(options: options);
