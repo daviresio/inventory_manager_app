@@ -16,7 +16,7 @@ class ProductService {
       final options = QueryOptions(
         document: gql(query),
         variables: <String, dynamic>{
-          'product': payload.toMap(),
+          'product': payload.toJson(),
         },
       );
       final result = await GraphqlClient.request(options: options);
@@ -52,7 +52,7 @@ class ProductService {
       if (result.hasException) throw result.exception!;
 
       var responseJson = result.data!['product'];
-      var data = responseJson.map((element) => ProductModel.fromMap(element));
+      var data = responseJson.map((element) => ProductModel.fromJson(element));
 
       return List<ProductModel>.from(data);
     } catch (e, s) {

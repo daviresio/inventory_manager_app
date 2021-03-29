@@ -1,84 +1,36 @@
-import 'dart:convert';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
-class ProductModel {
-  String? id;
-  String name;
-  int amount;
-  String? image;
-  String? barcode;
+part 'product_model.freezed.dart';
+part 'product_model.g.dart';
 
-  ProductModel({
-    this.id,
-    required this.name,
-    required this.amount,
-    this.image,
-    this.barcode,
-  });
+const _uuid = Uuid();
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'amount': amount,
-      'image': image,
-      'barcode': barcode,
-    };
-  }
-
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
-    return ProductModel(
-      id: map['id'],
-      name: map['name'],
-      amount: map['amount'] ?? 0,
-      image: map['image'],
-      barcode: map['barcode'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ProductModel.fromJson(String source) =>
-      ProductModel.fromMap(json.decode(source));
-
-  ProductModel copyWith({
+@freezed
+class ProductModel with _$ProductModel {
+  factory ProductModel({
     String? id,
-    String? name,
-    int? amount,
+    required String name,
+    @Default(0) int amount,
     String? image,
     String? barcode,
-  }) {
+  }) = _ProductModel;
+
+  factory ProductModel.create() {
     return ProductModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      amount: amount ?? this.amount,
-      image: image ?? this.image,
-      barcode: barcode ?? this.barcode,
+      id: _uuid.v4(),
+      name: '',
     );
   }
 
-  @override
-  String toString() {
-    return 'ProductModel(id: $id, name: $name, amount: $amount, image: $image, barcode: $barcode)';
-  }
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
+}
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is ProductModel &&
-        other.id == id &&
-        other.name == name &&
-        other.amount == amount &&
-        other.image == image &&
-        other.barcode == barcode;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        amount.hashCode ^
-        image.hashCode ^
-        barcode.hashCode;
-  }
+@freezed
+class Product with _$Product {
+  const factory Product.data(ProductModel product) = ProductData;
+  const factory Product.loading() = ProductLoading;
+  const factory Product.error(Object error, StackTrace stackTrace) =
+      ProductError;
 }
