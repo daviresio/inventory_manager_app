@@ -15,102 +15,119 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  List<ProductModel> products = [];
-
   @override
   void initState() {
     super.initState();
-    ProductService.listProducts().then((value) {
-      if (value != null) {
-        setState(() {
-          products = List<ProductModel>.from(value);
-        });
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: CustomScrollView(
-        slivers: [
-          CupertinoSliverNavigationBar(
-            automaticallyImplyLeading: false,
-            largeTitle: Container(
-              height: 40,
-              padding: EdgeInsets.only(left: InventorySpacing.small1),
-              child: Text('Product'),
-            ),
-            border: null,
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                GestureDetector(
-                  child: Icon(
-                    InventoryIcons.layer_group,
-                    color: InventoryColors.darkColor,
-                    size: 18,
+    return StreamBuilder<List<ProductModel>>(
+        stream: ProductService.watchProducts(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Container(
+              color: InventoryColors.white,
+              child: Center(
+                child: CupertinoActivityIndicator(),
+              ),
+            );
+          }
+          var products = snapshot.data;
+          return CupertinoPageScaffold(
+            child: CustomScrollView(
+              slivers: [
+                CupertinoSliverNavigationBar(
+                  automaticallyImplyLeading: false,
+                  largeTitle: Container(
+                    height: 40,
+                    padding: EdgeInsets.only(left: InventorySpacing.small1),
+                    child: Text('Product'),
                   ),
-                  onTap: () {},
+                  border: null,
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      GestureDetector(
+                        child: Icon(
+                          InventoryIcons.layer_group,
+                          color: InventoryColors.darkColor,
+                          size: 18,
+                        ),
+                        onTap: () {},
+                      ),
+                      SizedBox(width: InventorySpacing.small3),
+                      GestureDetector(
+                        child: Icon(
+                          InventoryIcons.in_out,
+                          color: InventoryColors.darkColor,
+                          size: 18,
+                        ),
+                        onTap: () {},
+                      ),
+                      SizedBox(width: InventorySpacing.small3),
+                      GestureDetector(
+                        child: Icon(
+                          InventoryIcons.plus,
+                          color: InventoryColors.darkColor,
+                          size: 18,
+                        ),
+                        onTap: () async {
+                          await showCupertinoModalBottomSheet(
+                            context: context,
+                            isDismissible: true,
+                            builder: (context) => AddProductPage(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(width: InventorySpacing.small3),
-                GestureDetector(
-                  child: Icon(
-                    InventoryIcons.in_out,
-                    color: InventoryColors.darkColor,
-                    size: 18,
+                SliverToBoxAdapter(
+                  child: Container(
+                    padding: InventorySpacing.medium2
+                        .spacingHorizontal()
+                        .and(bottom: InventorySpacing.small3),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: CupertinoSearchTextField(
+                            placeholder:
+                                'Search a product name, barcode, category',
+                          ),
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.only(left: InventorySpacing.small3),
+                          child: Icon(
+                            InventoryIcons.barcode_read,
+                            size: 18,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  onTap: () {},
                 ),
-                SizedBox(width: InventorySpacing.small3),
-                GestureDetector(
-                  child: Icon(
-                    InventoryIcons.plus,
-                    color: InventoryColors.darkColor,
-                    size: 18,
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    products!
+                        .map(
+                          (e) => ProductItemList(
+                            product: e,
+                            onTap: () => showCupertinoModalBottomSheet(
+                              context: context,
+                              isDismissible: true,
+                              builder: (context) => AddProductPage(id: e.id),
+                            ),
+                          ),
+                        )
+                        .toList(),
                   ),
-                  onTap: () async {
-                    await showCupertinoModalBottomSheet(
-                      context: context,
-                      isDismissible: true,
-                      builder: (context) => AddProductPage(),
-                    );
-                  },
                 ),
               ],
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              padding: InventorySpacing.medium2
-                  .spacingHorizontal()
-                  .and(bottom: InventorySpacing.small3),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: CupertinoSearchTextField(
-                      placeholder: 'Search a product name, barcode, category',
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: InventorySpacing.small3),
-                    child: Icon(
-                      InventoryIcons.barcode_read,
-                      size: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              products.map((e) => ProductItemList(e)).toList(),
-            ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }

@@ -161,7 +161,7 @@ class __$ProductModelCopyWithImpl<$Res> extends _$ProductModelCopyWithImpl<$Res>
   }
 }
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 
 /// @nodoc
 class _$_ProductModel implements _ProductModel {

@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:inventory_manager/core/error_handler.dart';
 import 'package:uuid/uuid.dart';
-import 'package:pedantic/pedantic.dart';
 
 class RemoteFilesService {
   static final _instance = firebase_storage.FirebaseStorage.instance;
@@ -18,7 +17,7 @@ class RemoteFilesService {
           await _instance.ref(result.metadata?.fullPath).getDownloadURL();
       return imageUrl;
     } catch (e, s) {
-      unawaited(FirebaseCrashlytics.instance.recordError(e, s));
+      InventoryError.recordError(e, s);
       return null;
     }
   }

@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inventory_manager/components/input_row.dart';
 import 'package:inventory_manager/components/inventory_divider.dart';
-import 'package:inventory_manager/components/inventory_loading_container.dart';
 import 'package:inventory_manager/components/inventory_network_image.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
@@ -15,24 +14,29 @@ import 'package:image_picker/image_picker.dart';
 import 'package:inventory_manager/models/product_model.dart';
 import 'package:inventory_manager/screens/add_product_controller.dart';
 import 'package:inventory_manager/services/product_service.dart';
-import 'package:uuid/uuid.dart';
 
 class AddProductPage extends HookWidget {
+  final String? id;
+
+  AddProductPage({this.id});
+
   final picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
-    final nameCtl = TextEditingController();
+    final nameCtl = useTextEditingController();
     final productState = useProvider(productProvider);
-    final loading = useProvider(productLoaderProvider.state);
 
     useEffect(() {
-      Future.delayed(Duration(seconds: 2)).then((value) {
-        context.read(productNotifierProvider).getProduct(idProduct: null);
-      });
+      Future.microtask(
+        () => context.read(productNotifierProvider).getProduct(id: id),
+      );
     }, const []);
 
     Widget _image(ProductModel product) {
+      if (nameCtl.text.isEmpty && product.name.isNotEmpty) {
+        nameCtl.text = product.name;
+      }
       var imageSize = 80.0;
       return GestureDetector(
         onTap: () async {
@@ -115,133 +119,138 @@ class AddProductPage extends HookWidget {
       );
     }
 
-    Widget _body(ProductModel product, bool isLoading) {
-      return InventoryLoadingContainer(
-        loading: loading,
-        child: Scaffold(
-          backgroundColor: InventoryColors.white,
-          body: CustomScrollView(
-            physics: ClampingScrollPhysics(),
-            slivers: [
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: InventorySpacing.small3.spacingAll(),
-                  margin: EdgeInsets.only(
-                    bottom: InventorySpacing.small3,
-                  ),
-                  child: Center(
-                    child: Text('Add product').mediumBold(),
-                  ),
+    Widget _body(ProductModel product) {
+      return Scaffold(
+        backgroundColor: InventoryColors.white,
+        body: CustomScrollView(
+          physics: ClampingScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+              child: Container(
+                padding: InventorySpacing.small3.spacingAll(),
+                margin: EdgeInsets.only(
+                  bottom: InventorySpacing.small3,
+                ),
+                child: Center(
+                  child: Text('Add product').mediumBold(),
                 ),
               ),
-              SliverPadding(
-                padding: EdgeInsets.only(bottom: InventorySpacing.medium3),
-                sliver: SliverToBoxAdapter(
-                  child: Center(
-                    child: _image(product),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: InputRow(
-                  label: 'Barcode',
-                  placeholder: 'Select barcode input method',
-                  onTap: () {},
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: InventoryDivider.horizontal(
-                  margin:
-                      EdgeInsets.symmetric(horizontal: InventorySpacing.small3),
-                  height: 0.2,
-                  color: InventoryColors.darkColor.withOpacity(0.3),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: InputRow(
-                  label: 'Product',
-                  placeholder: 'Input product name.',
-                  controller: nameCtl,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 8,
-                  color: InventoryColors.lightGrey,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: InventorySpacing.small3.spacingAll(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          Text('Categories').mediumBold(),
-                          SizedBox(width: InventorySpacing.tiny3),
-                          Icon(
-                            InventoryIcons.circle_question,
-                            size: 16,
-                            color: InventoryColors.darkColor,
-                          ),
-                        ],
-                      ),
-                      TextButton(
-                        child: Text(
-                          'Customize',
-                          style: TextStyle(color: InventoryColors.primaryColor),
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: InventorySpacing.medium3.spacingAll(),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('Add product categories for convenient management.')
-                          .small(),
-                      Text('ex: Brand, manufacture, type, etc.').small(),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-          floatingActionButton: Container(
-            width: MediaQuery.of(context).size.width,
-            margin: InventorySpacing.medium2.spacingHorizontal(),
-            child: CupertinoButton(
-              child: Text('Save'),
-              color: InventoryColors.primaryColor,
-              onPressed: () async {
-                await ProductService.createProduct(
-                  payload: ProductModel(
-                    name: nameCtl.text,
-                    amount: 0,
-                    id: Uuid().v4(),
-                  ),
-                );
-
-                // Navigator.of(context).pop();
-              },
             ),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+            SliverPadding(
+              padding: EdgeInsets.only(bottom: InventorySpacing.medium3),
+              sliver: SliverToBoxAdapter(
+                child: Center(
+                  child: _image(product),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: InputRow(
+                label: 'Barcode',
+                placeholder: 'Select barcode input method',
+                onTap: () {},
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: InventoryDivider.horizontal(
+                margin:
+                    EdgeInsets.symmetric(horizontal: InventorySpacing.small3),
+                height: 0.2,
+                color: InventoryColors.darkColor.withOpacity(0.3),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: InputRow(
+                label: 'Product',
+                placeholder: 'Input product name.',
+                controller: nameCtl,
+                onChanged: (String value) {
+                  context.read(productNotifierProvider).changeName(value);
+                },
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                height: 8,
+                color: InventoryColors.lightGrey,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: InventorySpacing.small3.spacingAll(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Text('Categories').mediumBold(),
+                        SizedBox(width: InventorySpacing.tiny3),
+                        Icon(
+                          InventoryIcons.circle_question,
+                          size: 16,
+                          color: InventoryColors.darkColor,
+                        ),
+                      ],
+                    ),
+                    TextButton(
+                      child: Text(
+                        'Customize',
+                        style: TextStyle(color: InventoryColors.primaryColor),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: InventorySpacing.medium3.spacingAll(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Add product categories for convenient management.')
+                        .small(),
+                    Text('ex: Brand, manufacture, type, etc.').small(),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
+        floatingActionButton: Container(
+          width: MediaQuery.of(context).size.width,
+          margin: InventorySpacing.medium2.spacingHorizontal(),
+          child: CupertinoButton(
+            child: Text('Save'),
+            color: InventoryColors.primaryColor,
+            onPressed: () async {
+              await ProductService.createProduct(
+                payload: ProductModel(
+                  name: product.name,
+                  amount: 0,
+                  id: product.id,
+                  image: product.image,
+                ),
+              );
+
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
     }
 
     return productState.when(
-      data: (data) => _body(data, false),
-      loading: () => _body(ProductModel.create(), true),
+      data: (data) => _body(data),
+      loading: () => Container(
+        color: InventoryColors.white,
+        child: Center(
+          child: CupertinoActivityIndicator(),
+        ),
+      ),
       error: (_, __) => Container(),
     );
   }

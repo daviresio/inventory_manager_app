@@ -8,6 +8,7 @@ const _uuid = Uuid();
 
 @freezed
 class ProductModel with _$ProductModel {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   factory ProductModel({
     String? id,
     required String name,
