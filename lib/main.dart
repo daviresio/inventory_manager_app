@@ -3,8 +3,10 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_manager/core/inventory_routes.dart';
+import 'package:inventory_manager/screens/auth/auth_screen.dart';
 import 'package:inventory_manager/screens/home_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inventory_manager/screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,12 +40,22 @@ class _MyAppState extends State<MyApp> {
         barBackgroundColor: Colors.grey.shade50,
         scaffoldBackgroundColor: Colors.grey.shade50,
       ),
-      initialRoute: InventoryRoutes.home,
-      routes: {
-        InventoryRoutes.home: (_) => HomePage(),
-      },
+      // initialRoute: InventoryRoutes.home,
+      // routes: {
+      //   InventoryRoutes.home: (_) => HomePage(),
+      // },
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
+          case InventoryRoutes.main:
+            return CupertinoPageRoute(
+              builder: (_) => MainScreen(),
+              settings: settings,
+            );
+          case InventoryRoutes.auth:
+            return CupertinoPageRoute(
+              builder: (_) => AuthScreen(),
+              settings: settings,
+            );
           case InventoryRoutes.home:
             return CupertinoPageRoute(
               builder: (_) => HomePage(),
@@ -51,7 +63,7 @@ class _MyAppState extends State<MyApp> {
             );
           default:
             return CupertinoPageRoute(
-              builder: (_) => HomePage(),
+              builder: (_) => MainScreen(),
               settings: settings,
             );
         }

@@ -11,4 +11,5 @@ class InventoryColors {
   static const black = Color(0xFF000000);
   static const lightGrey = Color(0XFFeaeaea);
   static const transparent = Colors.transparent;
+  static const red = Colors.red;
 }

@@ -12,6 +12,10 @@ class InventorySpacing {
   static const medium1 = 16.0;
   static const medium2 = 20.0;
   static const medium3 = 24.0;
+
+  static const big1 = 30.0;
+  static const big2 = 40.0;
+  static const big3 = 50.0;
 }
 
 extension InventorySpacingExtension on double {

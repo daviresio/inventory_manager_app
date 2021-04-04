@@ -26,7 +26,17 @@ extension InventoryTextExtension on Text {
     );
   }
 
-  Text bigTitle({Color color = defaultTextColor}) {
+  Text bigTitleRegular({Color color = defaultTextColor}) {
+    return Text(
+      this.data!,
+      style: TextStyle(
+        fontSize: 20,
+        color: color,
+      ),
+    );
+  }
+
+  Text bigTitleBold({Color color = defaultTextColor}) {
     return Text(
       this.data!,
       style: TextStyle(
@@ -57,6 +67,10 @@ extension InventoryTextExtension on Text {
         color: color,
       ),
     );
+  }
+
+  TextSpan toSpan() {
+    return TextSpan(text: this.data, style: this.style);
   }
 }
 

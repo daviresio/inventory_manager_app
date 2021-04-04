@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
 import 'package:inventory_manager/screens/product_page.dart';
 import 'package:inventory_manager/screens/resume_page.dart';
+import 'package:inventory_manager/screens/settings_page.dart';
+import 'package:inventory_manager/screens/transaction_page.dart';
 
 class HomePage extends StatelessWidget {
   final pages = [
     ResumePage(),
     ProductPage(),
-    Container(),
-    Container(),
+    TransactionPage(),
+    SettingsPage(),
   ];
 
   @override

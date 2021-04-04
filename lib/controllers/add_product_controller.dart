@@ -57,4 +57,13 @@ class ProductNotifier extends StateNotifier<Product> {
       orElse: () {},
     );
   }
+
+  void setBarcode(String value) {
+    state.maybeWhen(
+      data: (data) {
+        state = Product.data(data.copyWith(barcode: value));
+      },
+      orElse: () {},
+    );
+  }
 }

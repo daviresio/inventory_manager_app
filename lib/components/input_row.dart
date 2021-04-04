@@ -36,13 +36,16 @@ class InputRow extends StatelessWidget {
             Text(label).mediumRegular(),
             SizedBox(width: InventorySpacing.medium2),
             Flexible(
-              child: CupertinoTextField(
-                controller: controller,
-                onChanged: onChanged,
-                readOnly: isTouch,
-                placeholder: placeholder,
-                decoration: BoxDecoration(
-                  color: InventoryColors.transparent,
+              child: IgnorePointer(
+                ignoring: isTouch,
+                child: CupertinoTextField(
+                  controller: controller,
+                  onChanged: onChanged,
+                  readOnly: isTouch,
+                  placeholder: placeholder,
+                  decoration: BoxDecoration(
+                    color: InventoryColors.transparent,
+                  ),
                 ),
               ),
             ),

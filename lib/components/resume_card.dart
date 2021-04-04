@@ -51,7 +51,7 @@ class ResumeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(value.toString()).bigTitle(color: InventoryColors.white),
+            Text(value.toString()).bigTitleBold(color: InventoryColors.white),
             SizedBox(height: InventorySpacing.small3),
             Text(label)
                 .smallBold(color: InventoryColors.white.withOpacity(0.5)),

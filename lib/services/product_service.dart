@@ -34,7 +34,7 @@ class ProductService {
   static Stream<List<ProductModel>>? watchProducts() {
     String query = '''
       subscription WatchProducts {
-        product {
+        product(order_by: {updated_at: desc}) {
           id
           name
           image

@@ -12,7 +12,7 @@ import 'package:inventory_manager/core/inventory_spacing.dart';
 import 'package:inventory_manager/core/inventory_extensions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inventory_manager/models/product_model.dart';
-import 'package:inventory_manager/screens/add_product_controller.dart';
+import 'package:inventory_manager/controllers/add_product_controller.dart';
 import 'package:inventory_manager/services/product_service.dart';
 
 class AddProductPage extends HookWidget {
@@ -25,6 +25,7 @@ class AddProductPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final nameCtl = useTextEditingController();
+    final barcodeCtl = useTextEditingController();
     final productState = useProvider(productProvider);
 
     useEffect(() {
@@ -33,9 +34,65 @@ class AddProductPage extends HookWidget {
       );
     }, const []);
 
+    Future<void> _showManualBarcodeDialog() async {
+      await showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          var controller = TextEditingController(
+            text: productState.maybeWhen(
+              data: (data) => data.barcode,
+              orElse: () => '',
+            ),
+          );
+          return CupertinoAlertDialog(
+            title: Text('Manual input'),
+            actions: [
+              CupertinoButton(
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                    color: InventoryColors.red,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              CupertinoButton(
+                child: Text('OK'),
+                onPressed: () {
+                  context
+                      .read(productNotifierProvider)
+                      .setBarcode(controller.value.text);
+                  barcodeCtl.text = controller.value.text;
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+            content: Column(mainAxisSize: MainAxisSize.min, children: [
+              Text('Please input barcode numbers.'),
+              Container(
+                margin: EdgeInsets.only(top: InventorySpacing.medium2),
+                child: CupertinoTextField(
+                  controller: controller,
+                  decoration: BoxDecoration(
+                    color: InventoryColors.transparent,
+                    border: Border(
+                      bottom: BorderSide(color: InventoryColors.primaryColor),
+                    ),
+                  ),
+                ),
+              ),
+            ]),
+          );
+        },
+      );
+    }
+
     Widget _image(ProductModel product) {
       if (nameCtl.text.isEmpty && product.name.isNotEmpty) {
         nameCtl.text = product.name;
+        barcodeCtl.text = product.barcode ?? '';
       }
       var imageSize = 80.0;
       return GestureDetector(
@@ -75,7 +132,7 @@ class AddProductPage extends HookWidget {
               cancelButton: CupertinoActionSheetAction(
                 child: Text(
                   'Cancel',
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: InventoryColors.red),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -148,7 +205,47 @@ class AddProductPage extends HookWidget {
               child: InputRow(
                 label: 'Barcode',
                 placeholder: 'Select barcode input method',
-                onTap: () {},
+                controller: barcodeCtl,
+                onTap: () async {
+                  var result = await showCupertinoModalPopup(
+                    context: context,
+                    builder: (context) => CupertinoActionSheet(
+                      message: Text('Barcode input method'),
+                      actions: [
+                        CupertinoActionSheetAction(
+                          child: Text('Scan input'),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        CupertinoActionSheetAction(
+                          child: Text('Manual input'),
+                          onPressed: () async {
+                            Navigator.of(context).pop('manual');
+                          },
+                        ),
+                        CupertinoActionSheetAction(
+                          child: Text('Generate barcode'),
+                          onPressed: () async {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                      cancelButton: CupertinoActionSheetAction(
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(color: InventoryColors.red),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                  );
+                  if (result != null && result == 'manual') {
+                    await _showManualBarcodeDialog();
+                  }
+                },
               ),
             ),
             SliverToBoxAdapter(
