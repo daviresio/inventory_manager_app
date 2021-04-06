@@ -9,9 +9,9 @@ class MainScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     var authState = useProvider(authStateProvider);
-
     return authState.when(
       data: (data) {
+        logout();
         if (data != null) {
           return HomePage();
         }

@@ -1,7 +1,10 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp({
+  ...functions.config().firebase,
+  databaseURL: "https://inventory-manager-6401a-default-rtdb.firebaseio.com/",
+});
 
 // On sign up.
 exports.processSignUp = functions.auth.user().onCreate(async (user) => {

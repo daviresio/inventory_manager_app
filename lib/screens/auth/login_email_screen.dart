@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:inventory_manager/controllers/auth_controller.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_spacing.dart';
 import 'package:inventory_manager/core/inventory_extensions.dart';
@@ -8,6 +9,9 @@ import 'package:inventory_manager/core/inventory_extensions.dart';
 class LoginEmailScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    var emailCtl = useTextEditingController();
+    var passwordCtl = useTextEditingController();
+
     return Scaffold(
       backgroundColor: InventoryColors.white,
       body: CustomScrollView(
@@ -31,14 +35,28 @@ class LoginEmailScreen extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Enter your e-mail address').smallBold(),
-                  SizedBox(height: InventorySpacing.tiny3),
-                  CupertinoTextField(
-                    placeholder: 'Email address',
+                  Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: InventorySpacing.tiny3),
+                    child: CupertinoTextField(
+                      placeholder: 'Email address',
+                      controller: emailCtl,
+                    ),
                   ),
-                  SizedBox(height: InventorySpacing.tiny3),
                   Text(
                     'Sign-up will be proceeded if a account with this e-mail don\'t exist on Simple Inventory',
                   ).small(),
+                  SizedBox(height: InventorySpacing.medium3),
+                  Text('Enter your password').smallBold(),
+                  Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: InventorySpacing.tiny3),
+                    child: CupertinoTextField(
+                      placeholder: 'Password',
+                      obscureText: true,
+                      controller: passwordCtl,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -52,7 +70,11 @@ class LoginEmailScreen extends HookWidget {
           child: Text('Next'),
           color: InventoryColors.primaryColor,
           onPressed: () async {
-            Navigator.of(context).pop();
+            await loginOrCreateUserByMail(
+              email: emailCtl.value.text,
+              password: passwordCtl.value.text,
+            );
+            // Navigator.of(context).pop();
           },
         ),
       ),

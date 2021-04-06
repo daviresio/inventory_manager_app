@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inventory_manager/core/error_handler.dart';
 import 'package:inventory_manager/services/auth_service.dart';
 
 final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
@@ -13,3 +14,51 @@ final authServiceProvider = Provider<AuthService>((ref) {
 final authStateProvider = StreamProvider<User?>((ref) {
   return ref.watch(authServiceProvider).authStateChange;
 });
+
+var token;
+
+loginOrCreateUserByMail({
+  required String email,
+  required String password,
+}) async {
+  var result = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+  if (result.isEmpty) {
+    await createUserByEmail(email: email, password: password);
+  } else {
+    await loginByEmail(email: email, password: password);
+    token = await FirebaseAuth.instance.currentUser!.getIdToken();
+    print(token);
+  }
+}
+
+createUserByEmail({
+  required String email,
+  required String password,
+}) async {
+  try {
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+  } catch (e, s) {
+    InventoryError.recordError(e, s);
+  }
+}
+
+loginByEmail({
+  required String email,
+  required String password,
+}) async {
+  try {
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
+  } catch (e, s) {
+    InventoryError.recordError(e, s);
+  }
+}
+
+logout() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+  } catch (e, s) {
+    InventoryError.recordError(e, s);
+  }
+}
