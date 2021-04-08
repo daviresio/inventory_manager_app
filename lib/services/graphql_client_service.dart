@@ -1,6 +1,6 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class GraphqlClient {
+class GraphqlConfig {
   static String _token =
       'Ion6I7V0YnKeAUOj9qsZuJ2Vkm62r1Zb3vAL6sP4nYHruLgsU4bnqTKprjKL6LXJ';
   // static final AuthLink authLink = AuthLink(getToken: () => _token);
@@ -15,15 +15,16 @@ class GraphqlClient {
   static final _wsLink = WebSocketLink(
     'wss://inventory-manager.hasura.app/v1/graphql',
     config: SocketClientConfig(
-        autoReconnect: true,
-        inactivityTimeout: Duration(seconds: 30),
-        initialPayload: () async {
-          return {
-            'headers': {
-              'x-hasura-admin-secret': _token,
-            }
-          };
-        }),
+      autoReconnect: true,
+      inactivityTimeout: Duration(seconds: 30),
+      initialPayload: () async {
+        return {
+          'headers': {
+            'x-hasura-admin-secret': _token,
+          }
+        };
+      },
+    ),
   );
 
   // static final Link link = authLink.concat(_httpLink).concat(_wsLink);
@@ -66,3 +67,59 @@ class GraphqlClient {
     return _wsClient.subscribe(options);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import 'dart:io';
+
+// import 'package:flutter/material.dart';
+// import 'package:graphql_flutter/graphql_flutter.dart';
+
+// class GraphqlConfig {
+//   static final _url = 'https://inventory-manager.hasura.app/v1/graphql';
+
+//   static final HttpLink httpLink = HttpLink(
+//     _url,
+//   );
+
+//   static String? _token;
+//   static final AuthLink authLink = AuthLink(getToken: () => _token!);
+//   static final WebSocketLink webSocketLink = WebSocketLink(
+//     _url,
+//     config: SocketClientConfig(
+//       autoReconnect: true,
+//       inactivityTimeout: Duration(seconds: 30),
+//       initialPayload: () async {
+//         return {
+//           'headers': {'Authorization': 'Bearer $_token'},
+//         };
+//       },
+//     ),
+//   );
+
+//   static final Link link = authLink.concat(httpLink).concat(webSocketLink);
+//   static String? token;
+
+//   static ValueNotifier<GraphQLClient> initializeClient(String token) {
+//     _token = token;
+//     ValueNotifier<GraphQLClient> client = ValueNotifier(
+//       GraphQLClient(
+//         link: link,
+//         cache: GraphQLCache(store: HiveStore()),
+//       ),
+//     );
+//     return client;
+//   }
+// }

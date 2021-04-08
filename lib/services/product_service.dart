@@ -1,13 +1,13 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:inventory_manager/core/error_handler.dart';
-import 'package:inventory_manager/models/product_model.dart';
+import 'package:inventory_manager/models/product/product_model.dart';
 import 'package:inventory_manager/services/graphql_client_service.dart';
 
 class ProductService {
   static Future<bool> createProduct({required ProductModel payload}) async {
-    String query = '''
-      mutation CreateProduct(\$product: product_insert_input!) {
-        insert_product(objects: [\$product]) {
+    String query = r'''
+      mutation CreateProduct($product: product_insert_input!) {
+        insert_product(objects: [$product]) {
           affected_rows
         }
       }
@@ -20,7 +20,7 @@ class ProductService {
           'product': payload.toJson(),
         },
       );
-      final result = await GraphqlClient.request(options: options);
+      final result = await GraphqlConfig.request(options: options);
 
       if (result.hasException) throw result.exception!;
 
@@ -32,7 +32,7 @@ class ProductService {
   }
 
   static Stream<List<ProductModel>>? watchProducts() {
-    String query = '''
+    String query = r'''
       subscription WatchProducts {
         product(order_by: {updated_at: desc}) {
           id
@@ -47,7 +47,7 @@ class ProductService {
       final options = SubscriptionOptions(
         document: gql(query),
       );
-      final result = GraphqlClient.subscription(options: options);
+      final result = GraphqlConfig.subscription(options: options);
       return result.map((event) {
         var responseJson = event.data!['product'];
         var data =
@@ -62,9 +62,9 @@ class ProductService {
   }
 
   static Future<ProductModel?> getProduct({required String id}) async {
-    String query = '''
-      query GetProduct(\$id: uuid!) {
-        product_by_pk(id: \$id) {
+    String query = r'''
+      query GetProduct($id: uuid!) {
+        product_by_pk(id: $id) {
           id
           name
           amount
@@ -81,7 +81,7 @@ class ProductService {
           'id': id,
         },
       );
-      final result = await GraphqlClient.request(options: options);
+      final result = await GraphqlConfig.request(options: options);
 
       if (result.hasException) throw result.exception!;
 
@@ -91,6 +91,33 @@ class ProductService {
     } catch (e, s) {
       InventoryError.recordError(e, s);
       return null;
+    }
+  }
+
+  static Future<bool> createCategory({required ProductModel payload}) async {
+    String query = r'''
+      mutation CreateProduct($product: product_insert_input!) {
+        insert_product(objects: [$product]) {
+          affected_rows
+        }
+      }
+    ''';
+
+    try {
+      final options = QueryOptions(
+        document: gql(query),
+        variables: <String, dynamic>{
+          'product': payload.toJson(),
+        },
+      );
+      final result = await GraphqlConfig.request(options: options);
+
+      if (result.hasException) throw result.exception!;
+
+      return true;
+    } catch (e, s) {
+      InventoryError.recordError(e, s);
+      return false;
     }
   }
 }

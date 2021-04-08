@@ -11,7 +11,7 @@ import 'package:inventory_manager/core/inventory_radius.dart';
 import 'package:inventory_manager/core/inventory_spacing.dart';
 import 'package:inventory_manager/core/inventory_extensions.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:inventory_manager/models/product_model.dart';
+import 'package:inventory_manager/models/product/product_model.dart';
 import 'package:inventory_manager/controllers/add_product_controller.dart';
 import 'package:inventory_manager/services/product_service.dart';
 

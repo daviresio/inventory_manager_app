@@ -25,13 +25,17 @@ class _$ProductModelTearOff {
       required String name,
       int amount = 0,
       String? image,
-      String? barcode}) {
+      String? barcode,
+      DateTime? createdAt,
+      DateTime? updatedAt}) {
     return _ProductModel(
       id: id,
       name: name,
       amount: amount,
       image: image,
       barcode: barcode,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 
@@ -50,6 +54,8 @@ mixin _$ProductModel {
   int get amount => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   String? get barcode => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -63,7 +69,13 @@ abstract class $ProductModelCopyWith<$Res> {
           ProductModel value, $Res Function(ProductModel) then) =
       _$ProductModelCopyWithImpl<$Res>;
   $Res call(
-      {String? id, String name, int amount, String? image, String? barcode});
+      {String? id,
+      String name,
+      int amount,
+      String? image,
+      String? barcode,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -81,6 +93,8 @@ class _$ProductModelCopyWithImpl<$Res> implements $ProductModelCopyWith<$Res> {
     Object? amount = freezed,
     Object? image = freezed,
     Object? barcode = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -103,6 +117,14 @@ class _$ProductModelCopyWithImpl<$Res> implements $ProductModelCopyWith<$Res> {
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
               as String?,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -115,7 +137,13 @@ abstract class _$ProductModelCopyWith<$Res>
       __$ProductModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id, String name, int amount, String? image, String? barcode});
+      {String? id,
+      String name,
+      int amount,
+      String? image,
+      String? barcode,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -135,6 +163,8 @@ class __$ProductModelCopyWithImpl<$Res> extends _$ProductModelCopyWithImpl<$Res>
     Object? amount = freezed,
     Object? image = freezed,
     Object? barcode = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_ProductModel(
       id: id == freezed
@@ -157,6 +187,14 @@ class __$ProductModelCopyWithImpl<$Res> extends _$ProductModelCopyWithImpl<$Res>
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
               as String?,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -166,7 +204,13 @@ class __$ProductModelCopyWithImpl<$Res> extends _$ProductModelCopyWithImpl<$Res>
 /// @nodoc
 class _$_ProductModel implements _ProductModel {
   _$_ProductModel(
-      {this.id, required this.name, this.amount = 0, this.image, this.barcode});
+      {this.id,
+      required this.name,
+      this.amount = 0,
+      this.image,
+      this.barcode,
+      this.createdAt,
+      this.updatedAt});
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
       _$_$_ProductModelFromJson(json);
@@ -182,10 +226,14 @@ class _$_ProductModel implements _ProductModel {
   final String? image;
   @override
   final String? barcode;
+  @override
+  final DateTime? createdAt;
+  @override
+  final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, name: $name, amount: $amount, image: $image, barcode: $barcode)';
+    return 'ProductModel(id: $id, name: $name, amount: $amount, image: $image, barcode: $barcode, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -201,7 +249,14 @@ class _$_ProductModel implements _ProductModel {
             (identical(other.image, image) ||
                 const DeepCollectionEquality().equals(other.image, image)) &&
             (identical(other.barcode, barcode) ||
-                const DeepCollectionEquality().equals(other.barcode, barcode)));
+                const DeepCollectionEquality()
+                    .equals(other.barcode, barcode)) &&
+            (identical(other.createdAt, createdAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdAt, createdAt)) &&
+            (identical(other.updatedAt, updatedAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedAt, updatedAt)));
   }
 
   @override
@@ -211,7 +266,9 @@ class _$_ProductModel implements _ProductModel {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(amount) ^
       const DeepCollectionEquality().hash(image) ^
-      const DeepCollectionEquality().hash(barcode);
+      const DeepCollectionEquality().hash(barcode) ^
+      const DeepCollectionEquality().hash(createdAt) ^
+      const DeepCollectionEquality().hash(updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -230,7 +287,9 @@ abstract class _ProductModel implements ProductModel {
       required String name,
       int amount,
       String? image,
-      String? barcode}) = _$_ProductModel;
+      String? barcode,
+      DateTime? createdAt,
+      DateTime? updatedAt}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$_ProductModel.fromJson;
@@ -245,6 +304,10 @@ abstract class _ProductModel implements ProductModel {
   String? get image => throw _privateConstructorUsedError;
   @override
   String? get barcode => throw _privateConstructorUsedError;
+  @override
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @override
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ProductModelCopyWith<_ProductModel> get copyWith =>

@@ -4,7 +4,7 @@ import 'package:inventory_manager/components/product_item_list.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
 import 'package:inventory_manager/core/inventory_spacing.dart';
-import 'package:inventory_manager/models/product_model.dart';
+import 'package:inventory_manager/models/product/product_model.dart';
 import 'package:inventory_manager/screens/add_product_page.dart';
 import 'package:inventory_manager/services/product_service.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

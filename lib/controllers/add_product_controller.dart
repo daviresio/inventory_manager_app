@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:inventory_manager/models/product_model.dart';
+import 'package:inventory_manager/models/product/product_model.dart';
 import 'package:inventory_manager/services/product_service.dart';
 import 'package:inventory_manager/services/remote_files_service.dart';
 
@@ -15,10 +15,10 @@ final productProvider = Provider<Product>((ref) {
 });
 
 class ProductNotifier extends StateNotifier<Product> {
+  final Reader read;
+
   ProductNotifier(this.read, [Product? product])
       : super(product ?? Product.loading());
-
-  final Reader read;
 
   getProduct({required String? id}) async {
     if (id == null) {

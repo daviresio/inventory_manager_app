@@ -15,6 +15,8 @@ class ProductModel with _$ProductModel {
     @Default(0) int amount,
     String? image,
     String? barcode,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) = _ProductModel;
 
   factory ProductModel.create() {

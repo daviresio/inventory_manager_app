@@ -50,6 +50,7 @@ loginByEmail({
   try {
     await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
+    print(await FirebaseAuth.instance.currentUser!.getIdToken());
   } catch (e, s) {
     InventoryError.recordError(e, s);
   }

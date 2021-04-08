@@ -11,7 +11,7 @@ class MainScreen extends HookWidget {
     var authState = useProvider(authStateProvider);
     return authState.when(
       data: (data) {
-        logout();
+        // logout();
         if (data != null) {
           return HomePage();
         }

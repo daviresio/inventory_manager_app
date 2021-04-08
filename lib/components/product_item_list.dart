@@ -6,7 +6,7 @@ import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_radius.dart';
 import 'package:inventory_manager/core/inventory_spacing.dart';
 import 'package:inventory_manager/core/inventory_extensions.dart';
-import 'package:inventory_manager/models/product_model.dart';
+import 'package:inventory_manager/models/product/product_model.dart';
 
 class ProductItemList extends StatelessWidget {
   final ProductModel product;
