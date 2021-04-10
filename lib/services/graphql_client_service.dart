@@ -1,7 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class GraphqlConfig {
-  static String _token =
+  static final String _token =
       'Ion6I7V0YnKeAUOj9qsZuJ2Vkm62r1Zb3vAL6sP4nYHruLgsU4bnqTKprjKL6LXJ';
   // static final AuthLink authLink = AuthLink(getToken: () => _token);
 
@@ -54,7 +54,7 @@ class GraphqlConfig {
   );
 
   static Future<QueryResult> request({required QueryOptions options}) async {
-    final QueryResult result = await _client.query(options).timeout(
+    final result = await _client.query(options).timeout(
           const Duration(seconds: 15),
           onTimeout: () => throw Exception('Timeout error'),
         );

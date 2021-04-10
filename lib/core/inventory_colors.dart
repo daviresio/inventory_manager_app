@@ -9,7 +9,7 @@ class InventoryColors {
   static const lightColor = Color(0xFFede7e3);
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF000000);
-  static const lightGrey = Color(0XFFeaeaea);
+  static const lightGrey = Color(0xffeaeaea);
   static const transparent = Colors.transparent;
   static const red = Colors.red;
 }

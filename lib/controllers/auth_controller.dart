@@ -17,7 +17,7 @@ final authStateProvider = StreamProvider<User?>((ref) {
 
 var token;
 
-loginOrCreateUserByMail({
+Future<void> loginOrCreateUserByMail({
   required String email,
   required String password,
 }) async {
@@ -31,7 +31,7 @@ loginOrCreateUserByMail({
   }
 }
 
-createUserByEmail({
+Future<void> createUserByEmail({
   required String email,
   required String password,
 }) async {
@@ -43,7 +43,7 @@ createUserByEmail({
   }
 }
 
-loginByEmail({
+Future<void> loginByEmail({
   required String email,
   required String password,
 }) async {
@@ -56,7 +56,7 @@ loginByEmail({
   }
 }
 
-logout() async {
+Future<void> logout() async {
   try {
     await FirebaseAuth.instance.signOut();
   } catch (e, s) {

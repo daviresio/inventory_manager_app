@@ -22,7 +22,7 @@ class InputRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isTouch = onTap != null;
+    var isTouch = onTap != null;
 
     return InkWell(
       onTap: onTap,

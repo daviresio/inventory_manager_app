@@ -20,7 +20,7 @@ class ProductNotifier extends StateNotifier<Product> {
   ProductNotifier(this.read, [Product? product])
       : super(product ?? Product.loading());
 
-  getProduct({required String? id}) async {
+  void getProduct({required String? id}) async {
     if (id == null) {
       var data = ProductModel.create();
       state = Product.data(data);

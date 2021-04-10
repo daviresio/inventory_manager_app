@@ -26,21 +26,21 @@ class ResumePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
+                  onTap: () {},
                   child: Icon(
                     InventoryIcons.plus,
                     color: InventoryColors.darkColor,
                     size: 18,
                   ),
-                  onTap: () {},
                 ),
                 SizedBox(width: InventorySpacing.small3),
                 GestureDetector(
+                  onTap: () {},
                   child: Icon(
                     InventoryIcons.bell,
                     color: InventoryColors.darkColor,
                     size: 18,
                   ),
-                  onTap: () {},
                 ),
               ],
             ),

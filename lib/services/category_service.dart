@@ -6,7 +6,7 @@ import 'package:inventory_manager/services/graphql_client_service.dart';
 class CategoryService {
   static Future<Category> createCategory(
       {required CategoryModel payload}) async {
-    String query = r'''
+    var query = r'''
       mutation CreateCategory($category: category_insert_input!) {
         insert_category_one(object: $category) {
           id
@@ -38,7 +38,7 @@ class CategoryService {
   }
 
   static Future<List<CategoryModel>?> listCategories() async {
-    String query = r'''
+    var query = r'''
       query ListCategories {
         category(order_by: {updated_at: desc}) {
           id

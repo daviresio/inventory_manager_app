@@ -49,29 +49,24 @@ class _ProductPageState extends State<ProductPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       GestureDetector(
+                        onTap: () {},
                         child: Icon(
                           InventoryIcons.layer_group,
                           color: InventoryColors.darkColor,
                           size: 18,
                         ),
-                        onTap: () {},
                       ),
                       SizedBox(width: InventorySpacing.small3),
                       GestureDetector(
+                        onTap: () {},
                         child: Icon(
                           InventoryIcons.in_out,
                           color: InventoryColors.darkColor,
                           size: 18,
                         ),
-                        onTap: () {},
                       ),
                       SizedBox(width: InventorySpacing.small3),
                       GestureDetector(
-                        child: Icon(
-                          InventoryIcons.plus,
-                          color: InventoryColors.darkColor,
-                          size: 18,
-                        ),
                         onTap: () async {
                           await showCupertinoModalBottomSheet(
                             context: context,
@@ -79,6 +74,11 @@ class _ProductPageState extends State<ProductPage> {
                             builder: (context) => AddProductPage(),
                           );
                         },
+                        child: Icon(
+                          InventoryIcons.plus,
+                          color: InventoryColors.darkColor,
+                          size: 18,
+                        ),
                       ),
                     ],
                   ),

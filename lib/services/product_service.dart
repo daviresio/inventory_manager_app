@@ -5,7 +5,7 @@ import 'package:inventory_manager/services/graphql_client_service.dart';
 
 class ProductService {
   static Future<bool> createProduct({required ProductModel payload}) async {
-    String query = r'''
+    var query = r'''
       mutation CreateProduct($product: product_insert_input!) {
         insert_product(objects: [$product]) {
           affected_rows
@@ -32,7 +32,7 @@ class ProductService {
   }
 
   static Stream<List<ProductModel>>? watchProducts() {
-    String query = r'''
+    var query = r'''
       subscription WatchProducts {
         product(order_by: {updated_at: desc}) {
           id
@@ -62,7 +62,7 @@ class ProductService {
   }
 
   static Future<ProductModel?> getProduct({required String id}) async {
-    String query = r'''
+    var query = r'''
       query GetProduct($id: uuid!) {
         product_by_pk(id: $id) {
           id

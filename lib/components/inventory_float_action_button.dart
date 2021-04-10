@@ -15,9 +15,9 @@ class InventoryFloatActionButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       margin: InventorySpacing.medium2.spacingHorizontal(),
       child: CupertinoButton(
-        child: Text(label),
         color: InventoryColors.primaryColor,
         onPressed: onPressed,
+        child: Text(label),
       ),
     );
   }

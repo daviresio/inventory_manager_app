@@ -46,32 +46,32 @@ class AddCategoryPage extends HookWidget {
                         message: Text('Barcode input method'),
                         actions: [
                           CupertinoActionSheetAction(
-                            child: Text('Text'),
                             onPressed: () async {
                               Navigator.of(context).pop('TEXT');
                             },
+                            child: Text('Text'),
                           ),
                           CupertinoActionSheetAction(
-                            child: Text('Number'),
                             onPressed: () async {
                               Navigator.of(context).pop('NUMBER');
                             },
+                            child: Text('Number'),
                           ),
                           CupertinoActionSheetAction(
-                            child: Text('Date'),
                             onPressed: () async {
                               Navigator.of(context).pop('DATE');
                             },
+                            child: Text('Date'),
                           ),
                         ],
                         cancelButton: CupertinoActionSheetAction(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           child: Text(
                             'Cancel',
                             style: TextStyle(color: InventoryColors.red),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
                         ),
                       ),
                     );

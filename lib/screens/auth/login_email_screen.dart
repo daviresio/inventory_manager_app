@@ -67,7 +67,6 @@ class LoginEmailScreen extends HookWidget {
         width: MediaQuery.of(context).size.width,
         margin: InventorySpacing.medium2.spacingHorizontal(),
         child: CupertinoButton(
-          child: Text('Next'),
           color: InventoryColors.primaryColor,
           onPressed: () async {
             await loginOrCreateUserByMail(
@@ -76,6 +75,7 @@ class LoginEmailScreen extends HookWidget {
             );
             // Navigator.of(context).pop();
           },
+          child: Text('Next'),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

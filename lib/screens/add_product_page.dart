@@ -51,18 +51,17 @@ class AddProductPage extends HookWidget {
             title: Text('Manual input'),
             actions: [
               CupertinoButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
                 child: Text(
                   'Cancel',
                   style: TextStyle(
                     color: InventoryColors.red,
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
               ),
               CupertinoButton(
-                child: Text('OK'),
                 onPressed: () {
                   context
                       .read(productNotifierProvider)
@@ -70,6 +69,7 @@ class AddProductPage extends HookWidget {
                   barcodeCtl.text = controller.value.text;
                   Navigator.of(context).pop();
                 },
+                child: Text('OK'),
               ),
             ],
             content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -106,7 +106,6 @@ class AddProductPage extends HookWidget {
               message: Text('Select product image'),
               actions: [
                 CupertinoActionSheetAction(
-                  child: Text('Open gallery'),
                   onPressed: () async {
                     var result =
                         await picker.getImage(source: ImageSource.gallery);
@@ -117,9 +116,9 @@ class AddProductPage extends HookWidget {
                     }
                     Navigator.of(context).pop();
                   },
+                  child: Text('Open gallery'),
                 ),
                 CupertinoActionSheetAction(
-                  child: Text('Take photo'),
                   onPressed: () async {
                     var result =
                         await picker.getImage(source: ImageSource.camera);
@@ -130,16 +129,17 @@ class AddProductPage extends HookWidget {
                     }
                     Navigator.of(context).pop();
                   },
+                  child: Text('Take photo'),
                 ),
               ],
               cancelButton: CupertinoActionSheetAction(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
                 child: Text(
                   'Cancel',
                   style: TextStyle(color: InventoryColors.red),
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
               ),
             ),
           );
@@ -216,32 +216,32 @@ class AddProductPage extends HookWidget {
                       message: Text('Barcode input method'),
                       actions: [
                         CupertinoActionSheetAction(
-                          child: Text('Scan input'),
                           onPressed: () async {
                             Navigator.of(context).pop();
                           },
+                          child: Text('Scan input'),
                         ),
                         CupertinoActionSheetAction(
-                          child: Text('Manual input'),
                           onPressed: () async {
                             Navigator.of(context).pop('manual');
                           },
+                          child: Text('Manual input'),
                         ),
                         CupertinoActionSheetAction(
-                          child: Text('Generate barcode'),
                           onPressed: () async {
                             Navigator.of(context).pop();
                           },
+                          child: Text('Generate barcode'),
                         ),
                       ],
                       cancelButton: CupertinoActionSheetAction(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                         child: Text(
                           'Cancel',
                           style: TextStyle(color: InventoryColors.red),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
                       ),
                     ),
                   );
@@ -294,10 +294,6 @@ class AddProductPage extends HookWidget {
                       ],
                     ),
                     TextButton(
-                      child: Text(
-                        'Customize',
-                        style: TextStyle(color: InventoryColors.primaryColor),
-                      ),
                       onPressed: () async {
                         await showCupertinoModalBottomSheet(
                           context: context,
@@ -305,6 +301,10 @@ class AddProductPage extends HookWidget {
                           builder: (context) => CategoriesPage(),
                         );
                       },
+                      child: Text(
+                        'Customize',
+                        style: TextStyle(color: InventoryColors.primaryColor),
+                      ),
                     ),
                   ],
                 ),

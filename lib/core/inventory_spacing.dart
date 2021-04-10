@@ -33,13 +33,13 @@ extension InventorySpacingExtension on double {
 }
 
 extension InventoryEdgeInsetsExtension on EdgeInsets {
-  and({
+  EdgeInsets and({
     double? left,
     double? top,
     double? right,
     double? bottom,
   }) {
-    return this.copyWith(
+    return copyWith(
       left: left ?? this.left,
       top: top ?? this.top,
       right: right ?? this.right,

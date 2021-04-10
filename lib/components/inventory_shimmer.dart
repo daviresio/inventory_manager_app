@@ -10,12 +10,12 @@ class InventoryShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
+      baseColor: InventoryColors.lightGrey,
+      highlightColor: InventoryColors.lightGrey.withOpacity(0.3),
       child: child ??
           Container(
             color: InventoryColors.white,
           ),
-      baseColor: InventoryColors.lightGrey,
-      highlightColor: InventoryColors.lightGrey.withOpacity(0.3),
     );
   }
 }

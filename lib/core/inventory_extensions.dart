@@ -6,7 +6,7 @@ extension InventoryTextExtension on Text {
 
   Text mediumBold({Color color = defaultTextColor}) {
     return Text(
-      this.data!,
+      data!,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 16,
@@ -17,7 +17,7 @@ extension InventoryTextExtension on Text {
 
   Text mediumRegular({Color color = defaultTextColor}) {
     return Text(
-      this.data!,
+      data!,
       style: TextStyle(
         fontWeight: FontWeight.normal,
         fontSize: 16,
@@ -28,7 +28,7 @@ extension InventoryTextExtension on Text {
 
   Text bigTitleRegular({Color color = defaultTextColor}) {
     return Text(
-      this.data!,
+      data!,
       style: TextStyle(
         fontSize: 20,
         color: color,
@@ -38,7 +38,7 @@ extension InventoryTextExtension on Text {
 
   Text bigTitleBold({Color color = defaultTextColor}) {
     return Text(
-      this.data!,
+      data!,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 20,
@@ -49,7 +49,7 @@ extension InventoryTextExtension on Text {
 
   Text small({Color color = defaultTextColor}) {
     return Text(
-      this.data!,
+      data!,
       style: TextStyle(
         fontWeight: FontWeight.normal,
         fontSize: 10,
@@ -60,7 +60,7 @@ extension InventoryTextExtension on Text {
 
   Text smallBold({Color color = defaultTextColor}) {
     return Text(
-      this.data!,
+      data!,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 10,
@@ -70,12 +70,12 @@ extension InventoryTextExtension on Text {
   }
 
   TextSpan toSpan() {
-    return TextSpan(text: this.data, style: this.style);
+    return TextSpan(text: data, style: style);
   }
 }
 
 extension InventoryIconExtension on Icon {
   Icon defaultStyle() {
-    return Icon(this.icon, color: InventoryColors.darkColor, size: 16);
+    return Icon(icon, color: InventoryColors.darkColor, size: 16);
   }
 }

@@ -18,7 +18,7 @@ class CategoriesNotifier extends StateNotifier<CategoryList> {
   CategoriesNotifier(this.read, [CategoryList? categoryList])
       : super(categoryList ?? CategoryList.loading());
 
-  getList() async {
+  Future<void> getList() async {
     var result = await CategoryService.listCategories();
     if (result != null) {
       state = CategoryList.data(result);
@@ -37,7 +37,7 @@ class CategoryNotifier extends StateNotifier<Category> {
               id: Uuid().v4(),
             )));
 
-  setName(String value) {
+  void setName(String value) {
     state.maybeWhen(
       data: (data) {
         state = Category.data(data.copyWith(name: value));
@@ -46,7 +46,7 @@ class CategoryNotifier extends StateNotifier<Category> {
     );
   }
 
-  setType(String type) {
+  void setType(String type) {
     state.maybeWhen(
       data: (data) {
         state = Category.data(data.copyWith(valueType: type));
@@ -55,7 +55,7 @@ class CategoryNotifier extends StateNotifier<Category> {
     );
   }
 
-  save(BuildContext context) async {
+  Future<void> save(BuildContext context) async {
     await state.maybeWhen(
       data: (data) async {
         state = Category.loading();
