@@ -93,31 +93,4 @@ class ProductService {
       return null;
     }
   }
-
-  static Future<bool> createCategory({required ProductModel payload}) async {
-    String query = r'''
-      mutation CreateProduct($product: product_insert_input!) {
-        insert_product(objects: [$product]) {
-          affected_rows
-        }
-      }
-    ''';
-
-    try {
-      final options = QueryOptions(
-        document: gql(query),
-        variables: <String, dynamic>{
-          'product': payload.toJson(),
-        },
-      );
-      final result = await GraphqlConfig.request(options: options);
-
-      if (result.hasException) throw result.exception!;
-
-      return true;
-    } catch (e, s) {
-      InventoryError.recordError(e, s);
-      return false;
-    }
-  }
 }

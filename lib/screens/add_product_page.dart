@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:inventory_manager/components/input_row.dart';
 import 'package:inventory_manager/components/inventory_divider.dart';
+import 'package:inventory_manager/components/inventory_float_action_button.dart';
 import 'package:inventory_manager/components/inventory_network_image.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
@@ -13,7 +14,9 @@ import 'package:inventory_manager/core/inventory_extensions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inventory_manager/models/product/product_model.dart';
 import 'package:inventory_manager/controllers/add_product_controller.dart';
+import 'package:inventory_manager/screens/categories_page.dart';
 import 'package:inventory_manager/services/product_service.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AddProductPage extends HookWidget {
   final String? id;
@@ -295,7 +298,13 @@ class AddProductPage extends HookWidget {
                         'Customize',
                         style: TextStyle(color: InventoryColors.primaryColor),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await showCupertinoModalBottomSheet(
+                          context: context,
+                          isDismissible: true,
+                          builder: (context) => CategoriesPage(),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -316,25 +325,20 @@ class AddProductPage extends HookWidget {
             )
           ],
         ),
-        floatingActionButton: Container(
-          width: MediaQuery.of(context).size.width,
-          margin: InventorySpacing.medium2.spacingHorizontal(),
-          child: CupertinoButton(
-            child: Text('Save'),
-            color: InventoryColors.primaryColor,
-            onPressed: () async {
-              await ProductService.createProduct(
-                payload: ProductModel(
-                  name: product.name,
-                  amount: 0,
-                  id: product.id,
-                  image: product.image,
-                ),
-              );
+        floatingActionButton: InventoryFloatActionButton(
+          onPressed: () async {
+            await ProductService.createProduct(
+              payload: ProductModel(
+                name: product.name,
+                amount: 0,
+                id: product.id,
+                image: product.image,
+              ),
+            );
 
-              Navigator.of(context).pop();
-            },
-          ),
+            Navigator.of(context).pop();
+          },
+          label: 'Save',
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
