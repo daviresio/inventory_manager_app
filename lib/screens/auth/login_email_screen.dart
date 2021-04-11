@@ -34,7 +34,7 @@ class LoginEmailScreen extends HookWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Enter your e-mail address').smallBold(),
+                  Text('Enter your e-mail address').tinyBold(),
                   Container(
                     margin:
                         EdgeInsets.symmetric(vertical: InventorySpacing.tiny3),
@@ -45,9 +45,9 @@ class LoginEmailScreen extends HookWidget {
                   ),
                   Text(
                     'Sign-up will be proceeded if a account with this e-mail don\'t exist on Simple Inventory',
-                  ).small(),
+                  ).tiny(),
                   SizedBox(height: InventorySpacing.medium3),
-                  Text('Enter your password').smallBold(),
+                  Text('Enter your password').tinyBold(),
                   Container(
                     margin:
                         EdgeInsets.symmetric(vertical: InventorySpacing.tiny3),

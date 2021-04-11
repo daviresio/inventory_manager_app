@@ -53,8 +53,7 @@ class ResumeCard extends StatelessWidget {
           children: [
             Text(value.toString()).bigTitleBold(color: InventoryColors.white),
             SizedBox(height: InventorySpacing.small3),
-            Text(label)
-                .smallBold(color: InventoryColors.white.withOpacity(0.5)),
+            Text(label).tinyBold(color: InventoryColors.white.withOpacity(0.5)),
           ],
         ),
       ),

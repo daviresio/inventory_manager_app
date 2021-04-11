@@ -4,6 +4,50 @@ import 'package:inventory_manager/core/inventory_colors.dart';
 extension InventoryTextExtension on Text {
   static const defaultTextColor = InventoryColors.darkColor;
 
+  Text tiny({Color color = defaultTextColor}) {
+    return Text(
+      data!,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 10,
+        color: color,
+      ),
+    );
+  }
+
+  Text tinyBold({Color color = defaultTextColor}) {
+    return Text(
+      data!,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 10,
+        color: color,
+      ),
+    );
+  }
+
+  Text small({Color color = defaultTextColor}) {
+    return Text(
+      data!,
+      style: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
+        color: color,
+      ),
+    );
+  }
+
+  Text smallBold({Color color = defaultTextColor}) {
+    return Text(
+      data!,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+        color: color,
+      ),
+    );
+  }
+
   Text mediumBold({Color color = defaultTextColor}) {
     return Text(
       data!,
@@ -42,28 +86,6 @@ extension InventoryTextExtension on Text {
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 20,
-        color: color,
-      ),
-    );
-  }
-
-  Text small({Color color = defaultTextColor}) {
-    return Text(
-      data!,
-      style: TextStyle(
-        fontWeight: FontWeight.normal,
-        fontSize: 10,
-        color: color,
-      ),
-    );
-  }
-
-  Text smallBold({Color color = defaultTextColor}) {
-    return Text(
-      data!,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 10,
         color: color,
       ),
     );

@@ -41,4 +41,8 @@ class InventoryIcons {
   static const IconData question = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData circle_question = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData close = IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData ellipsis_stroke_vertical = IconData(0xe814, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chevron_left = IconData(0xe815, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData angle_left = IconData(0xe816, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData edit = IconData(0xe817, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

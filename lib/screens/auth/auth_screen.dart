@@ -46,7 +46,7 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text('Convenient Inventory Managment').smallBold(),
+                Text('Convenient Inventory Managment').tinyBold(),
               ],
             ),
             Column(
@@ -72,7 +72,7 @@ class AuthScreen extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.symmetric(
                           horizontal: InventorySpacing.tiny3),
-                      child: Text('or').smallBold(),
+                      child: Text('or').tinyBold(),
                     ),
                     Flexible(
                       child: Container(

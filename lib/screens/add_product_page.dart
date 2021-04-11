@@ -317,8 +317,8 @@ class AddProductPage extends HookWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('Add product categories for convenient management.')
-                        .small(),
-                    Text('ex: Brand, manufacture, type, etc.').small(),
+                        .tiny(),
+                    Text('ex: Brand, manufacture, type, etc.').tiny(),
                   ],
                 ),
               ),

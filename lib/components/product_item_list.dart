@@ -41,7 +41,7 @@ class ProductItemList extends StatelessWidget {
                   children: [
                     Text(product.name).mediumRegular(),
                     SizedBox(height: InventorySpacing.tiny2),
-                    Text(product.barcode ?? '').smallBold(),
+                    Text(product.barcode ?? '').tinyBold(),
                   ],
                 ),
               ],

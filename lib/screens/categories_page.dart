@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:inventory_manager/components/inventory_icon_button.dart';
 import 'package:inventory_manager/controllers/category_controller.dart';
 import 'package:inventory_manager/core/inventory_colors.dart';
 import 'package:inventory_manager/core/inventory_icons.dart';
@@ -29,7 +30,13 @@ class CategoriesPage extends HookWidget {
           children: [
             Text(category.valueType ?? ''),
             SizedBox(width: InventorySpacing.small1),
-            Icon(InventoryIcons.bell),
+            InventoryIconButton(
+              icon: Icon(
+                InventoryIcons.ellipsis_stroke_vertical,
+                size: 18,
+              ),
+              onTap: () {},
+            ),
           ],
         ),
       );
